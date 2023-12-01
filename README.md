@@ -1,1 +1,1 @@
-# liquid_client
+# Liquid Client for our API
