@@ -15,8 +15,12 @@ class Client:
         self.api_key = api_key
         self.client = httpx.Client(headers={"X-API-Key": self.api_key})
 
-    def get(self, path):
-        return httpx.get(self.base_url + path)
+    def list_models(self):
+        response = self.client.get(self.base_url + "/api/list_models")
+        if response.status_code != 200:
+            raise ValueError("Error: " + response.text)
+        response = response.json()
+        return response
 
     def delete_file(self, filename):
         response = self.client.post(
@@ -53,10 +57,11 @@ class Client:
         response = response.json()
         return response
 
-    def complete(self, conversation):
+    def complete(self, messages, model="auto"):
+        data = {"messages": messages, "model": model}
         response = self.client.post(
-            self.base_url + "/api/upload_file",
-            json=conversation,
+            self.base_url + "/api/complete",
+            json=data,
         )
         if response.status_code != 200:
             raise ValueError("Error: " + response.text)
@@ -68,6 +73,7 @@ def main():
     debug_url = "http://127.0.0.1:5000"
     debug_api_key = "9cba10db38d29db7b9f03503ef46146c1a431275d05c5c9a2fd278308c0d785d"
     client = Client(debug_url, api_key=debug_api_key)
+    print("Models: ", client.list_models())
 
     test_file = "test.txt"
     with open(test_file, "w") as f:
@@ -82,6 +88,10 @@ def main():
 
     files = client.list_files()
     print(f"Files: {files}")
+
+    chat = {"role": "user", "content": "Hello, world!"}
+    response = client.complete(chat)
+    print(f"Response: {response['messages'][-1]['content']}")
 
 
 if __name__ == "__main__":
