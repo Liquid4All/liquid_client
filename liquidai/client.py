@@ -51,6 +51,7 @@ class Client:
             response = self.client.post(
                 self.base_url + "/api/upload_file",
                 files={"file": (filename, f)},
+                timeout=60,
             )
         if response.status_code != 200:
             raise ValueError("Error: " + response.text)
@@ -62,6 +63,7 @@ class Client:
         response = self.client.post(
             self.base_url + "/api/complete",
             json=data,
+            timeout=60,
         )
         if response.status_code != 200:
             raise ValueError("Error: " + response.text)
@@ -89,9 +91,9 @@ def main():
     files = client.list_files()
     print(f"Files: {files}")
 
-    chat = {"role": "user", "content": "Hello, world!"}
+    chat = [{"role": "user", "content": "Hello, world!"}]
     response = client.complete(chat)
-    print(f"Response: {response['messages'][-1]['content']}")
+    print(f"Response: {response['message']['content']}")
 
 
 if __name__ == "__main__":
