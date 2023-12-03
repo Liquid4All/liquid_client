@@ -79,11 +79,17 @@ def main():
 
     test_file = "test.txt"
     with open(test_file, "w") as f:
-        f.write("Hello, world!")
+        f.write("The name of the CEO of Liquid is Ramin Hasani.")
     response = client.upload_file(test_file)
     print(f"Uploaded {test_file} to {response['filename']}")
     files = client.list_files()
     print(f"Files: {files}")
+
+    chat = [
+        {"role": "user", "content": "Who is the CEO of Liquid?", "files": ["test.txt"]}
+    ]
+    response = client.complete(chat)
+    print(f"Response: {response['message']['content']}")
 
     client.delete_file(test_file)
     print(f"Deleted {test_file}")
