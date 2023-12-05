@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["liquidai"]
+
+[project]
+name = "liquidai"
+version = "0.0.2"
+dependencies = [
+  "httpx",
+]
+requires-python = ">=3.6"
+authors = [
+  {name = "Mathias Lechner", email = "mathias@liquid.ai"},
+]
+description = "Client library for the Liquid AI API"
+readme = "README.md"
+license = {file = "LICENSE", name = "Apache License 2.0"}
+keywords = ["liquidai", "api",]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python"
+]
+
+[project.urls]
+Homepage = "https://liquid.ai"
+Documentation = "https://readthedocs.org"
+Repository = "https://github.com/Liquid4All/liquid_client"
+
