@@ -1,19 +1,19 @@
-# Liquid Client for our API
+# Python Client for the Liquid API
 
-## Installation
+## 📦 Installation
 ```bash
 pip install -U liquidai
 ```
 
-## Basic Usage
+## 💬 Basic Usage
 
 To access the API you need to set the environment variables `LIQUID_API_URL` and `LIQUID_API_KEY` to the URL of the API and your API key respectively.
 You can find your API key in the My Account page of the Liquid platform (left buttom icon in the navigation bar).
 
-The most secure way to set the environment variables, which the Liquid client will automatically use.
+🔐 **API Keys** The most secure way to set the environment variables, which the Liquid client will automatically use.
 ```bash
-export LIQUID_API_URL=http://127.0.0.1:5000
-export LIQUID_API_KEY=9cba10db38d29db7b9f03503ef46146c1a431275d05c5c9a2fd278308c0d785d
+export LIQUID_API_URL="http://127.0.0.1:5000"
+export LIQUID_API_KEY="9cba10db38d29db7b9f03503ef46146c1a431275d05c5c9a2fd278308c0d785d"
 ```
 
 Alternatively, you can also set the environment variables in your Python script:
@@ -34,7 +34,7 @@ Models:  ['liquid0']
 Response: Here is how to code a Hello World program in Python: print("Hello, world!")
 ```
 
-## Adding Knowledge Bases to the Model
+## 📚 Adding Knowledge Bases to the Model
 ```python
 # Let's create an example knowledge base
 test_file = "test.txt"
@@ -67,7 +67,7 @@ Output:
 The CEO of Liquid is Ramin Hasani.
 ```
 
-Finally we can delete the file from the server:
+❌ ** Removing files** Finally we can delete the file from the server:
 
 ```python
 client.delete_file(test_file)
