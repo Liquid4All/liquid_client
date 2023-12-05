@@ -67,7 +67,7 @@ Output:
 >>> Response: The CEO of Liquid is Ramin Hasani.
 ```
 
-❌ ** Removing files** Finally we can delete the file from the server:
+❌ **Removing files** Finally we can delete the file from the server:
 
 ```python
 client.delete_file(test_file)
@@ -81,3 +81,8 @@ Output:
 >>> Deleted test.txt
 >>> Files: []
 ```
+
+## Examples
+
+- [AI2 Reasoning Challenge](https://github.com/Liquid4All/liquid_client/tree/main/examples/run_ai2rc.py) Runs the AI2 Reasoning Challenge via the Liquid platform.
+

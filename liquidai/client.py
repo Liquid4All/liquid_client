@@ -4,7 +4,6 @@ import os
 
 class Client:
     def __init__(self, base_url=None, api_key=None):
-        self.base_url = base_url
         if base_url is None:
             if "LIQUID_URL" not in os.environ:
                 raise ValueError(
@@ -17,10 +16,14 @@ class Client:
                     "API key not found. Please set LIQUID_API_KEY environment variable or pass in the api_key argument."
                 )
             api_key = os.environ["LIQUID_API_KEY"]
+        self.base_url = base_url
         self.api_key = api_key
         self.client = httpx.Client(headers={"X-API-Key": self.api_key})
 
     def list_models(self):
+        """List all available models.
+        returns: A list of model names"""
+
         response = self.client.get(self.base_url + "/api/list_models")
         if response.status_code != 200:
             raise ValueError("Error: " + response.text)
@@ -28,6 +31,9 @@ class Client:
         return response
 
     def delete_file(self, filename):
+        """Deletes a file.
+        filename: The name of the file to delete."""
+
         response = self.client.post(
             self.base_url + "/api/delete_file",
             json={"filename": filename},
@@ -41,6 +47,9 @@ class Client:
         return response
 
     def list_files(self):
+        """List all files stored on the server by the user.
+        returns: A list of filenames"""
+
         response = self.client.get(
             self.base_url + "/api/list_files",
         )
@@ -50,6 +59,11 @@ class Client:
         return response
 
     def upload_file(self, path, filename=None):
+        """Uploads a file to the server.
+        path: The path to the file to upload.
+        filename: The name of the file to upload. If None, the basename of path is used.
+        """
+
         if filename is None:
             filename = os.path.basename(path)
         with open(path, "rb") as f:
@@ -64,6 +78,12 @@ class Client:
         return response
 
     def complete(self, messages, model="auto"):
+        """Completes a conversation.
+        messages: A list of messages. Each message is a dictionary with the following keys: role, content, files.
+        model: The name of the model to use. If None, the default model is used.
+        returns: A dictionary containing the response message.
+        """
+
         data = {"messages": messages, "model": model}
         response = self.client.post(
             self.base_url + "/api/complete",
