@@ -12,8 +12,8 @@ You can find your API key in the My Account page of the Liquid platform (left bo
 
 🔐 **API Keys** The most secure way to set the environment variables, which the Liquid client will automatically use.
 ```bash
-export LIQUID_URL="http://127.0.0.1:5000"
-export LIQUID_API_KEY="9cba10db38d29db7b9f03503ef46146c1a431275d05c5c9a2fd278308c0d785d"
+export LIQUID_URL="https://...."
+export LIQUID_API_KEY="9cba1....."
 ```
 
 Alternatively, you can also pass the `api_url` and `api_key` parameters to the `Client` constructor.
