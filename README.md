@@ -7,21 +7,19 @@ pip install -U liquidai
 
 ## 💬 Basic Usage
 
-To access the API you need to set the environment variables `LIQUID_API_URL` and `LIQUID_API_KEY` to the URL of the API and your API key respectively.
-You can find your API key in the My Account page of the Liquid platform (left buttom icon in the navigation bar).
+To access the API you need to set the environment variables `LIQUID_URL` and `LIQUID_API_KEY` to the UR and your API key of your Liquid AI subscription respectively.
+You can find your API key in the My Account page of the Liquid platform (left bottom icon in the navigation bar).
 
 🔐 **API Keys** The most secure way to set the environment variables, which the Liquid client will automatically use.
 ```bash
-export LIQUID_API_URL="http://127.0.0.1:5000"
+export LIQUID_URL="http://127.0.0.1:5000"
 export LIQUID_API_KEY="9cba10db38d29db7b9f03503ef46146c1a431275d05c5c9a2fd278308c0d785d"
 ```
 
-Alternatively, you can also set the environment variables in your Python script:
+Alternatively, you can also pass the `api_url` and `api_key` parameters to the `Client` constructor.
 ```python
-api_url = "http://127.0.0.1:5000"
-api_key = "9cba10db38d29db7b9f03503ef46146c1a431275d05c5c9a2fd278308c0d785d"
 # Create a client object with the API URL and API key
-client = Client(api_url, api_key=api_key)
+client = Client()
 print("Models: ", client.list_models()) # List all models
 # Create a conversation with the model (a list of messages)
 chat = [{"role": "user", "content": "Hello, world!"}]
@@ -67,7 +65,7 @@ Output:
 >>> Response: The CEO of Liquid is Ramin Hasani.
 ```
 
-❌ **Removing files** Finally we can delete the file from the server:
+**Removing files:** Finally we can delete the file from the server:
 
 ```python
 client.delete_file(test_file)
@@ -82,7 +80,9 @@ Output:
 >>> Files: []
 ```
 
-## Examples
+## 📌 Full Examples
 
+- [Quickstart](https://github.com/Liquid4All/liquid_client/tree/main/examples/hello_world.py) Full example of the basic usage described above.
 - [AI2 Reasoning Challenge](https://github.com/Liquid4All/liquid_client/tree/main/examples/run_ai2rc.py) Runs the AI2 Reasoning Challenge via the Liquid platform.
+- [Upload multiple files](https://github.com/Liquid4All/liquid_client/tree/main/examples/upload_folder.py) Script to upload a folder of files to the Liquid platform.
 

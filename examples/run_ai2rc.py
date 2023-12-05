@@ -14,10 +14,8 @@ def make_question(sample):
 
 
 def main():
-    debug_url = "http://127.0.0.1:5000"
-    debug_api_key = "9cba10db38d29db7b9f03503ef46146c1a431275d05c5c9a2fd278308c0d785d"
-
-    client = liquidai.Client(debug_url, api_key=debug_api_key)
+    # Don't forget to set the LIQUID_URL and LIQUID_API_KEY environment variable
+    client = liquidai.Client()
     print("Models: ", client.list_models())
 
     test_ds = load_dataset("ai2_arc", "ARC-Challenge")["test"]

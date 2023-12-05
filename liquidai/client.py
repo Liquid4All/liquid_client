@@ -20,13 +20,26 @@ class Client:
         self.api_key = api_key
         self.client = httpx.Client(headers={"X-API-Key": self.api_key})
 
+    def _check_for_errors(self, response):
+        if response.status_code == 404:
+            raise FileNotFoundError("Error: " + response.text)
+        elif response.status_code == 403:
+            raise PermissionError(
+                "Your API Key was not accepted by the server. Make sure you have the correct API Key."
+            )
+        elif response.status_code == 500:
+            raise ValueError(
+                "Sever error. Please try again later or contact your administrator."
+            )
+        elif response.status_code != 200:
+            raise ValueError("Error: " + response.text)
+
     def list_models(self):
         """List all available models.
         returns: A list of model names"""
 
         response = self.client.get(self.base_url + "/api/list_models")
-        if response.status_code != 200:
-            raise ValueError("Error: " + response.text)
+        self._check_for_errors(response)
         response = response.json()
         return response
 
@@ -38,11 +51,7 @@ class Client:
             self.base_url + "/api/delete_file",
             json={"filename": filename},
         )
-
-        if response.status_code == 404:
-            raise FileNotFoundError("Error: " + response.text)
-        if response.status_code != 200:
-            raise ValueError("Error: " + response.text)
+        self._check_for_errors(response)
         response = response.json()
         return response
 
@@ -53,8 +62,7 @@ class Client:
         response = self.client.get(
             self.base_url + "/api/list_files",
         )
-        if response.status_code != 200:
-            raise ValueError("Error: " + response.text)
+        self._check_for_errors(response)
         response = response.json()
         return response
 
@@ -72,8 +80,7 @@ class Client:
                 files={"file": (filename, f)},
                 timeout=60,
             )
-        if response.status_code != 200:
-            raise ValueError("Error: " + response.text)
+        self._check_for_errors(response)
         response = response.json()
         return response
 
@@ -90,8 +97,7 @@ class Client:
             json=data,
             timeout=60,
         )
-        if response.status_code != 200:
-            raise ValueError("Error: " + response.text)
+        self._check_for_errors(response)
         response = response.json()
         return response
 
