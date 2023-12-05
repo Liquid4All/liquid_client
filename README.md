@@ -30,8 +30,8 @@ print(f"Response: {response['message']['content']}")
 ```
 Output:
 ```
-Models:  ['liquid0']
-Response: Here is how to code a Hello World program in Python: print("Hello, world!")
+>>> Models:  ['liquid0']
+>>> Response: Here is how to code a Hello World program in Python: print("Hello, world!")
 ```
 
 ## 📚 Adding Knowledge Bases to the Model
@@ -49,8 +49,8 @@ print(f"Files: {files}")
 
 Output:
 ```
-Uploaded test.txt to text.txt
-Files: ['text.txt']
+>>> Uploaded test.txt to text.txt
+>>> Files: ['text.txt']
 ```
 
 Next we can tell the model to use the document we just uploaded:
@@ -64,7 +64,7 @@ print(f"Response: {response['message']['content']}")
 ```
 Output:
 ```
-The CEO of Liquid is Ramin Hasani.
+>>> Response: The CEO of Liquid is Ramin Hasani.
 ```
 
 ❌ ** Removing files** Finally we can delete the file from the server:
@@ -78,6 +78,6 @@ print(f"Files: {files}")
 ```
 Output:
 ```
-Deleted test.txt
-Files: []
+>>> Deleted test.txt
+>>> Files: []
 ```
