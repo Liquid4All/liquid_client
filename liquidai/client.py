@@ -1,15 +1,20 @@
 import httpx
 import os
-import json
 
 
 class Client:
-    def __init__(self, base_url, api_key=None):
+    def __init__(self, base_url=None, api_key=None):
         self.base_url = base_url
+        if base_url is None:
+            if "LIQUID_URL" not in os.environ:
+                raise ValueError(
+                    "URL key not found. Please set LIQUID_URL environment variable or pass in the base_url argument."
+                )
+            base_url = os.environ["LIQUID_URL"]
         if api_key is None:
             if "LIQUID_API_KEY" not in os.environ:
                 raise ValueError(
-                    "API key not found. Please set LIQUID_API_KEY environment variable"
+                    "API key not found. Please set LIQUID_API_KEY environment variable or pass in the api_key argument."
                 )
             api_key = os.environ["LIQUID_API_KEY"]
         self.api_key = api_key
