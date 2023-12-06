@@ -84,5 +84,6 @@ Output:
 
 - [Quickstart](https://github.com/Liquid4All/liquid_client/tree/main/examples/hello_world.py) Full example of the basic usage described above.
 - [AI2 Reasoning Challenge](https://github.com/Liquid4All/liquid_client/tree/main/examples/run_ai2rc.py) Runs the AI2 Reasoning Challenge via the Liquid platform.
+- [Code clone detection benchmark](https://github.com/Liquid4All/liquid_client/blob/main/examples/code_clone_detection.py) Runs part of the Codegluex code clone detection benchmark
 - [Upload multiple files](https://github.com/Liquid4All/liquid_client/tree/main/examples/upload_folder.py) Script to upload a folder of files to the Liquid platform.
 
