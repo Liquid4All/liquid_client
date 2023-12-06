@@ -18,7 +18,7 @@ def main():
     dataset = load_dataset(
         "code_x_glue_cc_defect_detection")
     preprompt = """
-    Given a function, determine whether it is an insecure code that may attack software systems. Answer either "True" or "False". Do not output anything else.
+    Given a function, determine whether it is an insecure code that may attack software systems or have any security issues. Answer "True" for insecure code or "False" for secure code. Do not output anything else.
     """
     test_set = dataset["test"]
 
@@ -33,6 +33,7 @@ def main():
         response = client.complete(chat)
         llm_answer = response["message"]["content"]
         llm_answer = str(llm_answer.replace(" ", ""))
+        print("llm_answer", llm_answer)
         label_answer = str(a)
         if llm_answer == label_answer:
             num_correct += 1
