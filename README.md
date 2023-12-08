@@ -45,7 +45,7 @@ Output:
 >>> #include <iostream>
 >>> 
 >>> int main() {
->>>     std::cout <  < "Hello, World!" << std::endl;
+>>>     std::cout << "Hello, World!" << std::endl;
 >>>     return 0;
 >>> }
 ```
@@ -65,7 +65,7 @@ print(f"Files: {files}")
 
 Output:
 ```
->>> Uploaded te  st.txt to text.txt
+>>> Uploaded test.txt to text.txt
 >>> Files: ['text.txt']
 ```
 
@@ -98,9 +98,6 @@ Output:
 >>> Files: []
 ```
 
-## Multi-turn Conversations
-```python
-```
 ## 📌 Full Examples
 
 - [Quickstart](https://github.com/Liquid4All/liquid_client/tree/main/examples/hello_world.py) Full example of the basic usage described above.
