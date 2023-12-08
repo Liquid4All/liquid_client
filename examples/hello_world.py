@@ -26,6 +26,10 @@ if __name__ == "__main__":
     files = client.list_files()
     print(f"Files: {files}")
 
-    chat = [{"role": "user", "content": "Hello, world!"}]
+    chat = [{"role": "user", "content": "Hello world in python?"}]
+    response = client.complete(chat)
+    print(f"Response: {response['message']['content']}")
+    chat.append(response["message"])
+    chat.append({"role": "user", "content": "And in C++?"})
     response = client.complete(chat)
     print(f"Response: {response['message']['content']}")

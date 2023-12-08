@@ -22,7 +22,7 @@ Alternatively, you can also pass the `api_url` and `api_key` parameters to the `
 client = Client()
 print("Models: ", client.list_models()) # List all models
 # Create a conversation with the model (a list of messages)
-chat = [{"role": "user", "content": "Hello, world!"}]
+chat = [{"role": "user", "content": "Hello world in python!"}]
 response = client.complete(chat)
 print(f"Response: {response['message']['content']}")
 ```
@@ -30,6 +30,24 @@ Output:
 ```
 >>> Models:  ['liquid0']
 >>> Response: Here is how to code a Hello World program in Python: print("Hello, world!")
+```
+
+Multi-turn conversations:
+```python
+chat.append(response["message"])
+chat.append({"role": "user", "content": "And in C++?"})
+response = client.complete(chat)
+print(f"Response: {response['message']['content']}")
+```
+
+Output:
+```
+>>> #include <iostream>
+>>> 
+>>> int main() {
+>>>     std::cout <  < "Hello, World!" << std::endl;
+>>>     return 0;
+>>> }
 ```
 
 ## 📚 Adding Knowledge Bases to the Model
@@ -47,7 +65,7 @@ print(f"Files: {files}")
 
 Output:
 ```
->>> Uploaded test.txt to text.txt
+>>> Uploaded te  st.txt to text.txt
 >>> Files: ['text.txt']
 ```
 
@@ -80,6 +98,9 @@ Output:
 >>> Files: []
 ```
 
+## Multi-turn Conversations
+```python
+```
 ## 📌 Full Examples
 
 - [Quickstart](https://github.com/Liquid4All/liquid_client/tree/main/examples/hello_world.py) Full example of the basic usage described above.
