@@ -34,7 +34,7 @@ Output:
 
 Multi-turn conversations:
 ```python
-chat.append(response["message"])
+chat.append(response["message"]) # add assistant message to conversation
 chat.append({"role": "user", "content": "And in C++?"})
 response = client.complete(chat)
 print(f"Response: {response['message']['content']}")
