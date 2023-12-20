@@ -33,3 +33,7 @@ if __name__ == "__main__":
     chat.append({"role": "user", "content": "And in C++?"})
     response = client.complete(chat)
     print(f"Response: {response['message']['content']}")
+    response = client.complete(chat, temperature=0.1)
+    print(f"Response: {response['message']['content']}")
+    response = client.complete(chat, max_new_tokens=3)
+    print(f"Response: {response['message']['content']}")

@@ -84,14 +84,29 @@ class Client:
         response = response.json()
         return response
 
-    def complete(self, messages, model="auto"):
+    def complete(
+        self,
+        messages,
+        model="auto",
+        max_new_tokens=384,
+        top_p=0.9,
+        temperature=0.9,
+        top_k=0,
+    ):
         """Completes a conversation.
         messages: A list of messages. Each message is a dictionary with the following keys: role, content, files.
         model: The name of the model to use. If None, the default model is used.
         returns: A dictionary containing the response message.
         """
 
-        data = {"messages": messages, "model": model}
+        data = {
+            "messages": messages,
+            "model": model,
+            "max_new_tokens": max_new_tokens,
+            "top_p": top_p,
+            "temperature": temperature,
+            "top_k": top_k,
+        }
         response = self.client.post(
             self.base_url + "/api/complete",
             json=data,
@@ -99,12 +114,14 @@ class Client:
         )
         self._check_for_errors(response)
         response = response.json()
+        if response["status"] == "error":
+            raise ValueError("Error: " + response["message"])
         return response
 
 
 def main():
     debug_url = "http://127.0.0.1:5000"
-    debug_api_key = "9cba10db38d29db7b9f03503ef46146c1a431275d05c5c9a2fd278308c0d785d"
+    debug_api_key = "2e98dece1646d241908e629fda51d4699e92f6ffc89ac8b4a04c5952ccc8c4cb"
     client = Client(debug_url, api_key=debug_api_key)
     print("Models: ", client.list_models())
 
@@ -128,9 +145,17 @@ def main():
     files = client.list_files()
     print(f"Files: {files}")
 
-    chat = [{"role": "user", "content": "Hello, world!"}]
+    chat = [{"role": "user", "content": "Hello world in python?"}]
     response = client.complete(chat)
     print(f"Response: {response['message']['content']}")
+    chat.append(response["message"])
+    chat.append({"role": "user", "content": "And in C++?"})
+    response = client.complete(chat)
+    print(f"Response (default): {response['message']['content']}")
+    response = client.complete(chat, temperature=1.5)
+    print(f"Response (high T): {response['message']['content']}")
+    response = client.complete(chat, max_new_tokens=10)
+    print(f"Response (only 10 tokens): {response['message']['content']}")
 
 
 if __name__ == "__main__":
