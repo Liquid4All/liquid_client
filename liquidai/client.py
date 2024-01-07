@@ -16,6 +16,10 @@ class Client:
                     "API key not found. Please set LIQUID_API_KEY environment variable or pass in the api_key argument."
                 )
             api_key = os.environ["LIQUID_API_KEY"]
+        if base_url.endswith("#"):
+            base_url = base_url[:-1]
+        if base_url.endswith("/"):
+            base_url = base_url[:-1]
         self.base_url = base_url
         self.api_key = api_key
         self.client = httpx.Client(headers={"X-API-Key": self.api_key})

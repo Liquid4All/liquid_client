@@ -28,4 +28,3 @@ classifiers = [
 Homepage = "https://liquid.ai"
 Documentation = "https://readthedocs.org"
 Repository = "https://github.com/Liquid4All/liquid_client"
-
