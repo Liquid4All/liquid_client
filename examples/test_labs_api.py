@@ -2,12 +2,17 @@ import liquidai
 import os
 
 """
-This example is used to test demo2 or labs.liquid.ai with the API versioning string as api/v1/.
+This example is used to test https://labs.liquid.ai with the API versioning string as api/v1/. Switch branch `git branch api-v1` before proceeding.
 
+Add environment variables
+```bash
+export LIQUID_URL="https://labs.liquid.ai"
+export LIQUID_API_KEY="9cba1....."
+```
 """
 
 
-def test_completion(client):
+def get_completion(client):
     chat = [{"role": "user", "content": "what is the largest animal on earth?"}]
     response = client.complete(chat)
     print(f"Response: {response['message']['content']}")
@@ -46,24 +51,6 @@ if __name__ == "__main__":
     # Don't forget to set the LIQUID_URL and LIQUID_API_KEY environment variable
     client = liquidai.Client()
     print("Models: ", client.list_models())
-    test_completion(client)
+    get_completion(client)
     test_rag_source(client)
     test_coding(client)
-
-    # client.delete_file(test_file)
-    # print(f"Deleted {test_file}")
-
-    # files = client.list_files()
-    # print(f"Files: {files}")
-
-    # chat = [{"role": "user", "content": "Hello world in python?"}]
-    # response = client.complete(chat)
-    # print(f"Response: {response['message']['content']}")
-    # chat.append(response["message"])
-    # chat.append({"role": "user", "content": "And in C++?"})
-    # response = client.complete(chat)
-    # print(f"Response: {response['message']['content']}")
-    # response = client.complete(chat, temperature=0.1)
-    # print(f"Response: {response['message']['content']}")
-    # response = client.complete(chat, max_new_tokens=3)
-    # print(f"Response: {response['message']['content']}")
