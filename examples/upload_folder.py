@@ -25,7 +25,7 @@ def main():
     for filename in all_files:
         filepath = os.path.join(path, filename)
         response = client.upload_file(filepath)
-        print(f"Uploaded {filepath} to {response['filename']}")
+        print(f"Uploaded {filepath} to {response['name']}")
 
     files = client.list_files()
     print(f"Files: {files}")

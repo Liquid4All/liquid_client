@@ -5,18 +5,26 @@
 pip install -U liquidai
 ```
 
-## 💬 Basic Usage
+## OpenAI compatible API
+For openai and langchain compatible apis like `/chat/completions` and `/embeddings`. 
 
-To access the API you need to set the environment variables `LIQUID_URL` and `LIQUID_API_KEY` to the UR and your API key of your Liquid AI subscription respectively.
-You can find your API key in the My Account page of the Liquid platform (left bottom icon in the navigation bar).
+Examples:
+- [openai](https://github.com/Liquid4All/liquid_client/tree/main/examples/openai/chat_completion.ipynb)
+- [langchain](https://github.com/Liquid4All/liquid_client/tree/main/examples/langchain/chat_openai.ipynb)
+
+## 💬 Other liquid api endpoints
+For retrieval augmentation enabled liquidai api endpoints like `/complete` with files as arguments.
+
+To access these APIs you need to set the environment variables `LIQUID_URL` and `LIQUID_API_KEY` to the UR and your API key of your Liquid AI subscription respectively.
+You can find your API key in the profile tab of the Liquid platform (left bottom icon in the navigation bar).
 
 🔐 **API Keys** The most secure way to set the environment variables, which the Liquid client will automatically use.
 ```bash
-export LIQUID_URL="https://...."
+export LIQUID_URL="https://labs.liquid.ai/api/v1"
 export LIQUID_API_KEY="9cba1....."
 ```
 
-Alternatively, you can also pass the `api_url` and `api_key` parameters to the `Client` constructor.
+Alternatively, you can also pass the `base_url` and `api_key` parameters to the `Client` constructor.
 ```python
 # Create a client object with the API URL and API key
 client = Client()
@@ -28,7 +36,7 @@ print(f"Response: {response['message']['content']}")
 ```
 Output:
 ```
->>> Models:  ['liquid0']
+>>> Models:  ['liquid-beacon-1.0']
 >>> Response: Here is how to code a Hello World program in Python: print("Hello, world!")
 ```
 
@@ -100,8 +108,8 @@ Output:
 
 ## 📌 Full Examples
 
-- [Quickstart](https://github.com/Liquid4All/liquid_client/tree/main/examples/hello_world.py) Full example of the basic usage described above.
-- [AI2 Reasoning Challenge](https://github.com/Liquid4All/liquid_client/tree/main/examples/run_ai2rc.py) Runs the AI2 Reasoning Challenge via the Liquid platform.
-- [Code clone detection benchmark](https://github.com/Liquid4All/liquid_client/blob/main/examples/code_clone_detection.py) Runs part of the Codegluex code clone detection benchmark
+- [Quickstart](https://github.com/Liquid4All/liquid_client/tree/main/examples/liquid_api.ipynb) Full example of the basic usage described above.
+- [AI2 Reasoning Challenge](https://github.com/Liquid4All/liquid_client/tree/main/examples/evals/run_ai2rc.py) Runs the AI2 Reasoning Challenge via the Liquid platform.
+- [Code clone detection benchmark](https://github.com/Liquid4All/liquid_client/blob/main/examples/evals/code_clone_detection.py) Runs part of the Codegluex code clone detection benchmark
 - [Upload multiple files](https://github.com/Liquid4All/liquid_client/tree/main/examples/upload_folder.py) Script to upload a folder of files to the Liquid platform.
 
