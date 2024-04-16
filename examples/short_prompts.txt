@@ -1,8 +1,0 @@
-Who are you?
-Complete the text: Lorem ipsum dolor 
-What is a good way to list all possible answers in a question that has not just one but mulitple of three different answers? Provide details and ocmments to the question of what is an astrosponge?
-This is an example of an extremely long prompt that contains a lot of tokens and should allow testing how the model performs when the prompt is longer than the maximum sequence length. More text is added to make sure that the prompt is longer than the maximum sequence length. The maximum sequence length is 512 tokens. This is an example of an extremely long prompt that contains a lot of tokens and should allow testing how the model performs when the prompt is longer than the maximum sequence length. More text is added to make sure that the prompt is longer than the maximum sequence length. The maximum sequence length is 512 tokens. Task: Write a summary of the text above.
-Write Hello World in Python
-What is the capital of Germany? Write a 2 page essay about the history of Germany.
-What is the capital of Germany? Output only the name, nothing else
-What is 12+3*4? Let's think step-by-step and explain the answer to slow learners.

@@ -1,9 +1,6 @@
 import httpx
 import os
 import json
-import requests
-
-API_STR = "/api/v1"
 
 
 class Client:
@@ -46,7 +43,7 @@ class Client:
         """List all available models.
         returns: A list of model names"""
 
-        response = self.client.get(self.base_url + API_STR + "/list_models")
+        response = self.client.get(self.base_url + "/list_models")
         self._check_for_errors(response)
         response = response.json()
         return response
@@ -57,7 +54,7 @@ class Client:
         payload = json.dumps({"name": filename})  # Manually prepare the JSON payload
 
         response = self.client.post(
-            self.base_url + API_STR + "/delete_file",
+            self.base_url + "/delete_file",
             json={"name": filename},
         )
         self._check_for_errors(response)
@@ -69,7 +66,7 @@ class Client:
         returns: A list of filenames"""
 
         response = self.client.get(
-            self.base_url + API_STR + "/list_files",
+            self.base_url + "/list_files",
         )
         self._check_for_errors(response)
         response = response.json()
@@ -86,7 +83,7 @@ class Client:
         with open(path, "rb") as f:
             print(f)
             response = self.client.post(
-                self.base_url + API_STR + "/upload_file",
+                self.base_url + "/upload_file",
                 files={"file": (filename, f)},
                 timeout=60,
             )
@@ -118,7 +115,7 @@ class Client:
             "top_k": top_k,
         }
         response = self.client.post(
-            self.base_url + API_STR + "/complete",
+            self.base_url + "/complete",
             json=data,
             timeout=60,
         )
