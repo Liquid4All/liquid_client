@@ -1,6 +1,7 @@
 from datasets import load_dataset
 import liquidai
 from tqdm import tqdm
+import re
 
 
 def create_qa(row):
@@ -12,6 +13,11 @@ def create_qa(row):
         """,
         row["label"],
     )
+
+
+def clean_string(s):
+    # Remove all whitespace and convert to lower case for case insensitive comparison
+    return re.sub(r"\s+", "", s).lower()
 
 
 def main():
@@ -32,9 +38,8 @@ def main():
         prompt = preprompt + q
         chat = [{"role": "user", "content": prompt}]
         response = client.complete(chat)
-        llm_answer = response["message"]["content"]
-        llm_answer = str(llm_answer.replace(" ", ""))
-        label_answer = str(a)
+        llm_answer = clean_string(response["message"]["content"])
+        label_answer = clean_string(str(a))
         if llm_answer == label_answer:
             num_correct += 1
         num_total += 1

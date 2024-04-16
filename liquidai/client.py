@@ -1,5 +1,6 @@
 import httpx
 import os
+import json
 
 
 class Client:
@@ -42,7 +43,7 @@ class Client:
         """List all available models.
         returns: A list of model names"""
 
-        response = self.client.get(self.base_url + "/api/list_models")
+        response = self.client.get(self.base_url + "/list_models")
         self._check_for_errors(response)
         response = response.json()
         return response
@@ -50,10 +51,11 @@ class Client:
     def delete_file(self, filename):
         """Deletes a file.
         filename: The name of the file to delete."""
+        payload = json.dumps({"name": filename})  # Manually prepare the JSON payload
 
         response = self.client.post(
-            self.base_url + "/api/delete_file",
-            json={"filename": filename},
+            self.base_url + "/delete_file",
+            json={"name": filename},
         )
         self._check_for_errors(response)
         response = response.json()
@@ -64,7 +66,7 @@ class Client:
         returns: A list of filenames"""
 
         response = self.client.get(
-            self.base_url + "/api/list_files",
+            self.base_url + "/list_files",
         )
         self._check_for_errors(response)
         response = response.json()
@@ -79,8 +81,9 @@ class Client:
         if filename is None:
             filename = os.path.basename(path)
         with open(path, "rb") as f:
+            print(f)
             response = self.client.post(
-                self.base_url + "/api/upload_file",
+                self.base_url + "/upload_file",
                 files={"file": (filename, f)},
                 timeout=60,
             )
@@ -91,7 +94,7 @@ class Client:
     def complete(
         self,
         messages,
-        model="auto",
+        model="liquid-beacon-1.0",
         max_new_tokens=384,
         top_p=0.9,
         temperature=0.9,
@@ -112,7 +115,7 @@ class Client:
             "top_k": top_k,
         }
         response = self.client.post(
-            self.base_url + "/api/complete",
+            self.base_url + "/complete",
             json=data,
             timeout=60,
         )
