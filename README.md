@@ -36,7 +36,7 @@ print(f"Response: {response['message']['content']}")
 ```
 Output:
 ```
->>> Models:  ['liquid-beacon-1.0']
+>>> Models:  ['liquid-preview-0.1']
 >>> Response: Here is how to code a Hello World program in Python: print("Hello, world!")
 ```
 

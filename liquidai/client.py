@@ -94,7 +94,7 @@ class Client:
     def complete(
         self,
         messages,
-        model="liquid-beacon-1.0",
+        model="liquid-preview-0.1",
         max_new_tokens=384,
         top_p=0.9,
         temperature=0.9,

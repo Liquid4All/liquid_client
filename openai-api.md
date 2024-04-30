@@ -15,7 +15,7 @@ curl --location 'https://labs.liquid.ai/api/v1/chat/completions' \
       "content": "What is the largest animal on earth? Explain the aniaml features in detail. "
     }
   ],
-  "model": "liquid-beacon-1.0",
+  "model": "liquid-preview-0.1",
   "max_new_tokens": 2048,
   "top_p": 0.9,
   "temperature": 0.9,
@@ -41,7 +41,7 @@ curl --location 'https://labs.liquid.ai/api/v1/chat/completions' \
         }
     ],
     "created": 41593,
-    "model": "liquid-beacon-1.0",
+    "model": "liquid-preview-0.1",
     "object": "chat.completion",
     "system_fingerprint": null,
     "usage": {
