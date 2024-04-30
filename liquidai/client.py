@@ -94,29 +94,47 @@ class Client:
     def complete(
         self,
         messages,
-        model="liquid-beacon-1.0",
-        max_new_tokens=384,
-        top_p=0.9,
-        temperature=0.9,
-        top_k=0,
+        model: str | None = None,
+        max_tokens: int | None = None,
+        top_p: float | None = None,
+        temperature: float | None = None,
     ):
         """Completes a conversation.
+
         messages: A list of messages. Each message is a dictionary with the following keys: role, content, files.
+
         model: The name of the model to use. If None, the default model is used.
         returns: A dictionary containing the response message.
+
+        max_tokens: The maximum number of [tokens](/tokenizer) that can be generated in the chat
+
+        temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+
+            We generally recommend altering this or `top_p` but not both.
+
+        top_p: An alternative to sampling with temperature, called nucleus sampling, where the
+            model considers the results of the tokens with top_p probability mass. So 0.1
+            means only the tokens comprising the top 10% probability mass are considered.
+
+            We generally recommend altering this or `temperature` but not both.
+
         """
 
-        data = {
+        request_data = {
             "messages": messages,
-            "model": model,
-            "max_new_tokens": max_new_tokens,
-            "top_p": top_p,
-            "temperature": temperature,
-            "top_k": top_k,
         }
+        if model:
+            request_data["model"] = model
+        if max_tokens:
+            request_data["max_tokens"] = max_tokens
+        if top_p:
+            request_data["top_p"] = top_p
+        if temperature:
+            request_data["temperature"] = temperature
+
         response = self.client.post(
             self.base_url + "/complete",
-            json=data,
+            json=request_data,
             timeout=60,
         )
         self._check_for_errors(response)
@@ -140,10 +158,8 @@ def main():
     files = client.list_files()
     print(f"Files: {files}")
 
-    chat = [
-        {"role": "user", "content": "Who is the CEO of Liquid?", "files": ["test.txt"]}
-    ]
-    response = client.complete(chat)
+    messages = [{"role": "user", "content": "Who is the CEO of Liquid?", "files": ["test.txt"]}]
+    response = client.complete(messages)
     print(f"Response: {response['message']['content']}")
 
     client.delete_file(test_file)
@@ -152,16 +168,16 @@ def main():
     files = client.list_files()
     print(f"Files: {files}")
 
-    chat = [{"role": "user", "content": "Hello world in python?"}]
-    response = client.complete(chat)
+    messages = [{"role": "user", "content": "Hello world in python?"}]
+    response = client.complete(messages)
     print(f"Response: {response['message']['content']}")
-    chat.append(response["message"])
-    chat.append({"role": "user", "content": "And in C++?"})
-    response = client.complete(chat)
+    messages.append(response["message"])
+    messages.append({"role": "user", "content": "And in C++?"})
+    response = client.complete(messages)
     print(f"Response (default): {response['message']['content']}")
-    response = client.complete(chat, temperature=1.5)
+    response = client.complete(messages, temperature=1.5)
     print(f"Response (high T): {response['message']['content']}")
-    response = client.complete(chat, max_new_tokens=10)
+    response = client.complete(messages, max_tokens=10)
     print(f"Response (only 10 tokens): {response['message']['content']}")
 
 

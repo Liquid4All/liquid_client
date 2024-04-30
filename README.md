@@ -5,20 +5,26 @@
 pip install -U liquidai
 ```
 
-## OpenAI compatible API
-For openai and langchain compatible apis like `/chat/completions` and `/embeddings`. 
+## API Key
 
-Examples:
-- [openai](https://github.com/Liquid4All/liquid_client/tree/main/examples/openai/chat_completion.ipynb)
-- [langchain](https://github.com/Liquid4All/liquid_client/tree/main/examples/langchain/chat_openai.ipynb)
-
-## 💬 Other liquid api endpoints
-For retrieval augmentation enabled liquidai api endpoints like `/complete` with files as arguments.
-
-To access these APIs you need to set the environment variables `LIQUID_URL` and `LIQUID_API_KEY` to the UR and your API key of your Liquid AI subscription respectively.
+To accesss the following URLs, you need to create an API key at labs.liquid.ai with your account.
 You can find your API key in the profile tab of the Liquid platform (left bottom icon in the navigation bar).
 
-🔐 **API Keys** The most secure way to set the environment variables, which the Liquid client will automatically use.
+## OpenAI compatible API
+For openai and langchain compatible [api documentation](https://github.com/Liquid4All/liquid_client/blob/main/openai-api.md).
+
+- `/chat/completions` endpoint example notebooks: 
+    - [Openai Client](https://github.com/Liquid4All/liquid_client/tree/main/examples/openai/chat_completion.ipynb)
+    - [Langchain Client](https://github.com/Liquid4All/liquid_client/tree/main/examples/langchain/chat_openai.ipynb)
+
+- `/embeddings`
+
+## 💬 Other liquid api endpoints
+- `/complete`. Retrieval augmentation enabled completion endpoint, can be passed with files.
+
+You need to set the environment variables `LIQUID_URL` and `LIQUID_API_KEY` to the UR and your API key of your Liquid AI subscription respectively.
+
+🔐 **API Keys** The most secure way is to set the environment variables, which the Liquid client will automatically use.
 ```bash
 export LIQUID_URL="https://labs.liquid.ai/api/v1"
 export LIQUID_API_KEY="9cba1....."
@@ -26,6 +32,7 @@ export LIQUID_API_KEY="9cba1....."
 
 Alternatively, you can also pass the `base_url` and `api_key` parameters to the `Client` constructor.
 ```python
+from liquidai import Client
 # Create a client object with the API URL and API key
 client = Client()
 print("Models: ", client.list_models()) # List all models
@@ -36,7 +43,7 @@ print(f"Response: {response['message']['content']}")
 ```
 Output:
 ```
->>> Models:  ['liquid-beacon-1.0']
+>>> Models:  ['liquid-preview-0.1']
 >>> Response: Here is how to code a Hello World program in Python: print("Hello, world!")
 ```
 
