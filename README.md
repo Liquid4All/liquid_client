@@ -26,6 +26,7 @@ export LIQUID_API_KEY="9cba1....."
 
 Alternatively, you can also pass the `base_url` and `api_key` parameters to the `Client` constructor.
 ```python
+from liquidai import Client
 # Create a client object with the API URL and API key
 client = Client()
 print("Models: ", client.list_models()) # List all models
@@ -36,7 +37,7 @@ print(f"Response: {response['message']['content']}")
 ```
 Output:
 ```
->>> Models:  ['liquid-beacon-1.0']
+>>> Models:  ['liquid-preview-0.1']
 >>> Response: Here is how to code a Hello World program in Python: print("Hello, world!")
 ```
 
