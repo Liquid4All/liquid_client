@@ -16,10 +16,9 @@ curl --location 'https://labs.liquid.ai/api/v1/chat/completions' \
     }
   ],
   "model": "liquid-preview-0.1",
-  "max_new_tokens": 2048,
+  "max_tokens": 2048,
   "top_p": 0.9,
   "temperature": 0.9,
-  "top_k": 0
 }'
 ```
 
